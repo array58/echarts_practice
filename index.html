@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/echarts.js"></script>
+		<style>
+			.charts_wrapper{
+				background: #F1F2F7;
+			}
+			.charts_wrapper>div{
+				display: inline-block;
+				width: 90%;
+				height: 560px;
+				background: #fff;
+				vertical-align: top;
+				margin: 10px;
+			}
+			.charts_wrapper>div .data_title{
+				background: #D7DDE4;
+				position: relative;
+				padding: 14px 15px;
+				font-size: 16px;
+			}
+			.charts_wrapper>div .charts_area{
+				height: 400px;
+			}
+			.charts_wrapper>div table{
+				width: 80%;
+				margin: 20px auto;
+				border-collapse: collapse;
+				text-align: center;
+			}
+			.charts_wrapper>div table td,.charts_wrapper>div table th{
+				border: 1px solid black;
+				height: 32px;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<div class="charts_wrapper">
+			<div>
+				<div class="data_title">今日各班幼儿出勤</div>
+				<div id="d_k" class="charts_area"></div>
+				<table >
+					<tr>
+						<th>实到</th>
+						<th>应到</th>
+						<th>出勤率</th>
+					</tr>
+					<tr>
+						<td>300</td>
+						<td>353</td>
+						<td>85%</td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<div class="data_title">今日教职工出勤</div>
+				<div id="d_t" class="charts_area"></div>
+			</div>
+			<div>
+				<div class="data_title">本月幼儿出勤</div>
+				<div id="m_k" class="charts_area"></div>
+			</div>
+			<div>
+				<div class="data_title">本月教职工出勤</div>
+				<div id="m_t" class="charts_area"></div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var myChart = echarts.init(document.getElementById('d_k'));
+			option = {
+			title: {
+				text: '',
+				subtext: ''
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'cross',
+					label: {
+						backgroundColor: '#283b56'
+					}
+				}
+			},
+			legend: {
+				data:['出勤率', '出勤人数'],
+				bottom:0
+			},
+			toolbox: {
+				show: true
+			},
+			dataZoom: {
+				show: false,
+				start: 0,
+				end: 100
+			},
+			xAxis: [
+				{
+					type: 'category',
+					boundaryGap: false,
+					data: []
+				},
+				{
+					type: 'category',
+					boundaryGap: false,
+					data: []
+				}
+			],
+			yAxis: [
+				{
+					type: 'value',
+					scale: false,
+					name: '出勤率',
+					max: 30,
+					min: 0,
+					boundaryGap: [0.2]
+				},
+				{
+					type: 'value',
+					scale: false,
+					name: '出勤人数',
+					max: 1,
+					min: 0,
+					boundaryGap: [0.2,0.2]
+				}
+			],
+			series: [
+				{
+					name:'出勤率',
+					type:'bar',
+					xAxisIndex: 1,
+					yAxisIndex: 1,
+					data:[]
+				},
+				{
+					name:'出勤人数',
+					type:'line',
+					data:[]
+				}
+			]
+		};
+		
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+		window.onresize=function(){
+			myChart.resize();
+		}
+		</script>
+	</body>
+</html>
